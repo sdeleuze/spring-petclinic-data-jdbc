@@ -16,6 +16,7 @@
 
 package org.springframework.samples.petclinic;
 
+import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 
@@ -26,6 +27,7 @@ public class PetClinicRuntimeHints implements RuntimeHintsRegistrar {
 		hints.resources().registerPattern("db/*");
 		hints.resources().registerPattern("META-INF/resources/webjars/*");
 		hints.resources().registerResourceBundle("messages/messages");
+		hints.reflection().registerType(java.sql.Date.class, MemberCategory.INVOKE_PUBLIC_METHODS);
 	}
 
 }
