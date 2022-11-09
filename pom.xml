@@ -293,25 +293,4 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <profiles>
-        <profile>
-            <id>native</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.graalvm.buildtools</groupId>
-                        <artifactId>native-maven-plugin</artifactId>
-                        <configuration>
-                            <metadataRepository>
-                                <enabled>true</enabled>
-                                <version>0.2.4</version>
-                            </metadataRepository>
-                            <verbose>true</verbose>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
 </project>
