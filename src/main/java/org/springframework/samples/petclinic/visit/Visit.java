@@ -18,6 +18,7 @@ package org.springframework.samples.petclinic.visit;
 import java.time.LocalDate;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -33,6 +34,7 @@ public class Visit {
 	private Long id;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column("VISIT_DATE")
 	private LocalDate date;
 
 	@NotEmpty

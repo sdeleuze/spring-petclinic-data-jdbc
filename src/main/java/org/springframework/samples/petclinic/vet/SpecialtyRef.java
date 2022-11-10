@@ -22,6 +22,6 @@ import org.springframework.data.relational.core.mapping.Table;
  *
  * @author Maciej Walkowiak
  */
-@Table("vet_specialty")
+@Table("VET_SPECIALTY")
 public record SpecialtyRef(Long specialty) {
 }

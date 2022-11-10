@@ -60,7 +60,7 @@ public interface PetRepository extends Repository<Pet, Integer> {
 	 * 
 	 * @param pet the {@link Pet} to save
 	 */
-	void save(Pet pet);
+	Pet save(Pet pet);
 
 	@Query("select * from pet where owner_id = :ownerId and name = :name")
 	List<Pet> findByOwnerIdAndName(@Param("ownerId") Integer ownerId, @Param("name") String name);

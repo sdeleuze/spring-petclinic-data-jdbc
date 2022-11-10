@@ -38,10 +38,10 @@ public class Pet {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthDate;
 
-	@Column("type_id")
+	@Column("TYPE_ID")
 	private Integer type;
 
-	@Column("owner_id")
+	@Column("OWNER_ID")
 	private Integer owner;
 
 	public void setBirthDate(LocalDate birthDate) {
