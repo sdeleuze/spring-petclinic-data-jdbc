@@ -15,11 +15,14 @@
  */
 package org.springframework.samples.petclinic;
 
+import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ImportRuntimeHints;
+import org.springframework.samples.petclinic.owner.PetController;
+import org.springframework.samples.petclinic.vet.VetDto;
 
 /**
  * PetClinic Spring Boot Application.
@@ -40,6 +43,10 @@ public class PetClinicApplication {
 		@Override
 		public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
 			hints.resources().registerResourceBundle("messages/messages");
+			// TODO Remove when https://github.com/spring-projects/spring-framework/issues/29571 is fixed
+			hints.reflection().registerType(VetDto.class, MemberCategory.INVOKE_PUBLIC_METHODS);
+			// TODO Remove when https://github.com/spring-projects/spring-framework/issues/29572 is fixed
+			hints.reflection().registerType(PetController.class, MemberCategory.INVOKE_PUBLIC_METHODS);
 		}
 	}
 
