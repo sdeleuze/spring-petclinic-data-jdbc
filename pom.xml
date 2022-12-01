@@ -24,6 +24,8 @@
         <!-- Web dependencies -->
         <webjars-bootstrap.version>3.3.6</webjars-bootstrap.version>
         <wro4j.version>1.8.0</wro4j.version>
+
+        <spring-cloud-azure.version>6.0.0-beta.3</spring-cloud-azure.version>
     </properties>
 
     <dependencies>
@@ -58,6 +60,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.azure.spring</groupId>
+            <artifactId>spring-cloud-azure-starter-storage</artifactId>
+        </dependency>
+
         <!-- Databases -->
         <dependency>
             <groupId>com.h2database</groupId>
@@ -71,11 +78,42 @@
         </dependency>
     </dependencies>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.azure.spring</groupId>
+                <artifactId>spring-cloud-azure-dependencies</artifactId>
+                <version>${spring-cloud-azure.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
     <build>
         <plugins>
             <plugin>
+                <groupId>org.graalvm.buildtools</groupId>
+                <artifactId>native-maven-plugin</artifactId>
+                <configuration>
+                    <buildArgs>
+                        <arg>-Djava.security.properties=src/main/resources/custom.security</arg>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <builder>paketobuildpacks/builder:tiny</builder>
+                        <env>
+                            <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>-Djava.security.properties=/workspace/BOOT-INF/classes/custom.security</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
+                        </env>
+                    </image>
+                </configuration>
                 <executions>
                     <execution>
                         <!-- Spring Boot Actuator displays build-related information
