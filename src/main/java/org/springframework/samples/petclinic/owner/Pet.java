@@ -44,6 +44,10 @@ public class Pet {
 	@Column("OWNER_ID")
 	private Integer owner;
 
+	private String imageUrl;
+
+	private String smallImageUrl;
+
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
@@ -86,6 +90,22 @@ public class Pet {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public String getSmallImageUrl() {
+		return smallImageUrl;
+	}
+
+	public void setSmallImageUrl(String smallImageUrl) {
+		this.smallImageUrl = smallImageUrl;
 	}
 
 	@Override
