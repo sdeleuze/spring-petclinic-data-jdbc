@@ -7,7 +7,7 @@
     <th:block th:if="${pet['new']}">New </th:block>
     Pet
   </h2>
-  <form th:object="${pet}" class="form-horizontal" method="post">
+  <form th:object="${pet}" class="form-horizontal" method="post" enctype="multipart/form-data">
     <input type="hidden" name="id" th:value="*{id}" />
     <div class="form-group has-feedback">
       <div class="form-group">
@@ -19,9 +19,11 @@
       <input
         th:replace="~{fragments/inputField :: input ('Name', 'name', 'text')}" />
       <input
-        th:replace="~{fragments/inputField :: input ('Birth Date', 'birthDate', 'date')}" />
+          th:replace="~{fragments/inputField :: input ('Birth Date', 'birthDate', 'date')}" />
       <input
         th:replace="~{fragments/selectField :: select ('Type', 'type', ${types})}" />
+      <input
+        th:replace="~{fragments/inputFileField :: input ('Image', 'image')}" />
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">

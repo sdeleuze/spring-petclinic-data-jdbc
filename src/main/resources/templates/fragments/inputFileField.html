@@ -1,0 +1,15 @@
+<html>
+<body>
+<form>
+    <th:block th:fragment="input (label, name)">
+        <div th:class="${'form-group'}"
+             class="form-group">
+            <label class="col-sm-2 control-label" th:text="${label}">Label</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="file" th:name="${name}" />
+            </div>
+        </div>
+    </th:block>
+</form>
+</body>
+</html>

@@ -16,6 +16,7 @@
 package org.springframework.samples.petclinic.owner;
 
 import java.util.Collection;
+
 import jakarta.validation.Valid;
 
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
@@ -30,6 +31,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Juergen Hoeller
@@ -80,7 +83,7 @@ public class PetController {
 	}
 
 	@PostMapping("/pets/new")
-	public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult result, ModelMap model) {
+	public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult result, ModelMap model, @RequestParam MultipartFile image) {
 		if (StringUtils.hasLength(pet.getName()) && pet.isNew()
 				&& !pets.findByOwnerIdAndName(owner.getId(), pet.getName()).isEmpty()) {
 			result.rejectValue("name", "duplicate", "already exists");
@@ -104,7 +107,7 @@ public class PetController {
 	}
 
 	@PostMapping("/pets/{petId}/edit")
-	public String processUpdateForm(@Valid Pet pet, BindingResult result, Owner owner, ModelMap model) {
+	public String processUpdateForm(@Valid Pet pet, BindingResult result, Owner owner, ModelMap model, @RequestParam MultipartFile image) {
 		if (result.hasErrors()) {
 			pet.setOwner(owner);
 			model.put("pet", pet);
