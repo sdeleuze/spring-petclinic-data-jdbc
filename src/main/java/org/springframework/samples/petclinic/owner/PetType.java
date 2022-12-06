@@ -23,5 +23,5 @@ import org.springframework.data.annotation.Id;
  * @author Juergen Hoeller
  * @author Maciej Walkowiak
  */
-public record PetType(@Id Long id, String name) {
+public record PetType(@Id Integer id, String name) {
 }

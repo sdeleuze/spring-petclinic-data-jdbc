@@ -54,7 +54,7 @@ public class PetControllerTests {
 
 	@BeforeEach
 	public void setup() {
-		var cat = new PetType(3L, "hamster");
+		var cat = new PetType(3, "hamster");
 		given(this.pets.findPetTypes()).willReturn(Lists.newArrayList(cat));
 		given(this.owners.findById(TEST_OWNER_ID)).willReturn(new Owner());
 		given(this.pets.findById(TEST_PET_ID)).willReturn(new Pet());

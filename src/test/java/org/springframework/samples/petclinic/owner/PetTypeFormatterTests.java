@@ -50,7 +50,7 @@ public class PetTypeFormatterTests {
 
 	@Test
 	public void testPrint() {
-		var petType = new PetType(3L, "Hamster");
+		var petType = new PetType(3, "Hamster");
 		String petTypeName = this.petTypeFormatter.print(petType, Locale.ENGLISH);
 		assertThat(petTypeName).isEqualTo("Hamster");
 	}
@@ -76,8 +76,8 @@ public class PetTypeFormatterTests {
 	 */
 	private List<PetType> makePetTypes() {
 		List<PetType> petTypes = new ArrayList<>();
-		petTypes.add(new PetType(1L, "Dog"));
-		petTypes.add(new PetType(2L, "Bird"));
+		petTypes.add(new PetType(1, "Dog"));
+		petTypes.add(new PetType(2, "Bird"));
 		return petTypes;
 	}
 
