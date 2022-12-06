@@ -5,6 +5,19 @@ This is a branch of the official [Spring PetClinic](https://github.com/spring-pr
 
 Check original project [readme](https://github.com/spring-projects/spring-petclinic/blob/master/readme.md) for introduction the project, how to run, and how to contribute.
 
+## Build & run
+
+To build as a native executable
+```
+./mvnw -Pnative clean native:compile
+target/image-service
+```
+
+To build a native container image for deployment in the Cloud
+```
+./mvn -Pnative spring-boot:build-image
+```
+
 ## Understanding the Spring Petclinic application with a few diagrams
 
 [See the presentation here](http://fr.slideshare.net/AntoineRey/spring-framework-petclinic-sample-application)
