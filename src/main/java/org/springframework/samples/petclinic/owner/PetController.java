@@ -69,8 +69,8 @@ public class PetController {
 	public PetController(PetRepository pets, OwnerRepository owners, RestTemplateBuilder restTemplateBuilder) {
 		this.pets = pets;
 		this.owners = owners;
-		this.restTemplate = restTemplateBuilder.setConnectTimeout(Duration.ofSeconds(5))
-				.setReadTimeout(Duration.ofSeconds(5)).build();
+		this.restTemplate = restTemplateBuilder.setConnectTimeout(Duration.ofSeconds(20))
+				.setReadTimeout(Duration.ofSeconds(20)).build();
 	}
 
 	@ModelAttribute("types")
