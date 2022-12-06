@@ -46,8 +46,6 @@ public class Pet {
 
 	private String imageUrl;
 
-	private String smallImageUrl;
-
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
@@ -98,14 +96,6 @@ public class Pet {
 
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
-	}
-
-	public String getSmallImageUrl() {
-		return smallImageUrl;
-	}
-
-	public void setSmallImageUrl(String smallImageUrl) {
-		this.smallImageUrl = smallImageUrl;
 	}
 
 	@Override

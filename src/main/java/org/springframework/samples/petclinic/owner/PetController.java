@@ -15,23 +15,16 @@
  */
 package org.springframework.samples.petclinic.owner;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.Collection;
+import java.util.List;
 
-import com.azure.core.util.BinaryData;
-import com.azure.core.util.Context;
-import com.azure.storage.blob.BlobClient;
-import com.azure.storage.blob.BlobContainerClient;
-import com.azure.storage.blob.BlobServiceClient;
-import com.azure.storage.blob.models.BlobHttpHeaders;
-import com.azure.storage.blob.models.PublicAccessType;
-import com.azure.storage.blob.options.BlobContainerCreateOptions;
 import jakarta.validation.Valid;
 
 import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -55,24 +48,20 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 @RequestMapping("/owners/{ownerId}")
-@RegisterReflectionForBinding({ Pet.class, PetType.class})
+@RegisterReflectionForBinding({ Pet.class, PetType.class, PetController.ImageProcessingResult.class })
 public class PetController {
 
 	private static final String VIEWS_PETS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
 	private final PetRepository pets;
 	private final OwnerRepository owners;
-	private final BlobContainerClient blobContainerClient;
 	private final RestTemplate restTemplate;
 
 	@Value("${resize.function.url}")
 	private String resizeFunctionUrl;
 
-	public PetController(PetRepository pets, OwnerRepository owners, BlobServiceClient blobServiceClient, RestTemplateBuilder restTemplateBuilder) {
+	public PetController(PetRepository pets, OwnerRepository owners, RestTemplateBuilder restTemplateBuilder) {
 		this.pets = pets;
 		this.owners = owners;
-		BlobContainerCreateOptions options = new BlobContainerCreateOptions();
-		options.setPublicAccessType(PublicAccessType.BLOB);
-		this.blobContainerClient = blobServiceClient.createBlobContainerIfNotExistsWithResponse("images", options, Context.NONE).getValue();
 		this.restTemplate = restTemplateBuilder.setConnectTimeout(Duration.ofSeconds(5))
 				.setReadTimeout(Duration.ofSeconds(5)).build();
 	}
@@ -106,7 +95,7 @@ public class PetController {
 	}
 
 	@PostMapping("/pets/new")
-	public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult result, ModelMap model, @RequestParam MultipartFile image) {
+	public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult result, ModelMap model, @Nullable @RequestParam MultipartFile image) {
 		if (StringUtils.hasLength(pet.getName()) && pet.isNew()
 				&& !pets.findByOwnerIdAndName(owner.getId(), pet.getName()).isEmpty()) {
 			result.rejectValue("name", "duplicate", "already exists");
@@ -131,7 +120,7 @@ public class PetController {
 	}
 
 	@PostMapping("/pets/{petId}/edit")
-	public String processUpdateForm(@Valid Pet pet, BindingResult result, Owner owner, ModelMap model, @RequestParam MultipartFile image) {
+	public String processUpdateForm(@Valid Pet pet, BindingResult result, Owner owner, ModelMap model, @Nullable @RequestParam MultipartFile image) {
 		if (result.hasErrors()) {
 			pet.setOwner(owner);
 			model.put("pet", pet);
@@ -144,29 +133,16 @@ public class PetController {
 		}
 	}
 
-	private void setImageUrls(Pet pet, MultipartFile image){
-		if (!image.isEmpty()) {
-			pet.setImageUrl(upload(image));
-			ResizeOptions options = new ResizeOptions(pet.getImageUrl(), 0, 100, 0);
-			String smallImageUrl = this.restTemplate.postForObject(this.resizeFunctionUrl, options, String.class);
-			pet.setSmallImageUrl(smallImageUrl);
+	private void setImageUrls(Pet pet, @Nullable MultipartFile image){
+		if (image != null && !image.isEmpty()) {
+			String url = resizeFunctionUrl + "?filename=" + image.getOriginalFilename();
+			ImageProcessingResult result = this.restTemplate.postForObject(url, image.getResource(), ImageProcessingResult.class);
+			pet.setImageUrl(result.url);
 		}
 	}
 
-	private String upload(MultipartFile file) {
-		BlobClient blobClient = this.blobContainerClient.getBlobClient(file.getOriginalFilename());
-		BlobHttpHeaders blobHttpHeaders = new BlobHttpHeaders();
-		blobHttpHeaders.setContentType(file.getContentType());
-		try {
-			blobClient.getBlockBlobClient().upload(BinaryData.fromBytes(file.getBytes()), true);
-		}
-		catch (IOException ex) {
-			throw new IllegalStateException(ex);
-		}
-		blobClient.setHttpHeaders(blobHttpHeaders);
-		return blobClient.getBlobUrl();
-	}
+	public record ImageProcessingResult(String url, List<Tag> tags) {}
 
-	record ResizeOptions (String url, double ratio, int width, int height) {}
+	public record Tag(String name, Float confidence) {}
 
 }

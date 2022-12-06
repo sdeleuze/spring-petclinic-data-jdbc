@@ -52,7 +52,7 @@
             <dd th:text="${pet.type.name}" /></dd>
             <th:block th:if="${pet.pet.imageUrl}">
               <dt>Image</dt>
-              <dd><a th:href="${pet.pet.imageUrl}" target="_blank"><img th:src="${pet.pet.smallImageUrl}" /></a></dd>
+              <dd><a th:href="${pet.pet.imageUrl}" target="_blank"><img width="100" th:src="${pet.pet.imageUrl}" /></a></dd>
             </th:block>
           </dl>
         </td>
