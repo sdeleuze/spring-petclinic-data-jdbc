@@ -22,9 +22,10 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.owner.*;
-import org.springframework.samples.petclinic.vet.SpecialtyRef;
+import org.springframework.samples.petclinic.vet.VetSpecialty;
 import org.springframework.samples.petclinic.vet.Vet;
 import org.springframework.samples.petclinic.vet.VetRepository;
 import org.springframework.samples.petclinic.visit.Visit;
@@ -58,7 +59,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Michael Isvy
  * @author Dave Syer
  */
-@DataJdbcTest(includeFilters = @ComponentScan.Filter(Service.class))
+@DataJdbcTest
 public class ClinicServiceTests {
 
 	@Autowired
@@ -172,7 +173,7 @@ public class ClinicServiceTests {
 
 		assertThat(vet.getLastName()).isEqualTo("Douglas");
 		assertThat(vet.getNrOfSpecialties()).isEqualTo(2);
-		assertThat(vet.getSpecialties()).containsExactlyInAnyOrder(new SpecialtyRef(3L), new SpecialtyRef(2L));
+		assertThat(vet.getSpecialties()).containsExactlyInAnyOrder(new VetSpecialty(3L, vet.getId()), new VetSpecialty(2L, vet.getId()));
 	}
 
 	@Test

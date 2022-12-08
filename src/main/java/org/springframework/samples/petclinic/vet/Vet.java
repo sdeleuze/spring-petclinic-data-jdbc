@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Set;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 
 /**
  * Simple JavaBean domain object representing a veterinarian.
@@ -44,17 +45,18 @@ public class Vet implements Serializable {
 	@NotEmpty
 	private String lastName;
 
-	private Set<SpecialtyRef> specialties;
+	@MappedCollection(idColumn = "VET_ID")
+	private Set<VetSpecialty> specialties;
 
-	protected Set<SpecialtyRef> getSpecialtiesInternal() {
+	protected Set<VetSpecialty> getSpecialtiesInternal() {
 		if (this.specialties == null) {
 			this.specialties = new HashSet<>();
 		}
 		return this.specialties;
 	}
 
-	public List<SpecialtyRef> getSpecialties() {
-		List<SpecialtyRef> sortedSpecs = new ArrayList<>(getSpecialtiesInternal());
+	public List<VetSpecialty> getSpecialties() {
+		List<VetSpecialty> sortedSpecs = new ArrayList<>(getSpecialtiesInternal());
 		return Collections.unmodifiableList(sortedSpecs);
 	}
 
@@ -63,7 +65,7 @@ public class Vet implements Serializable {
 	}
 
 	public void addSpecialty(Specialty specialty) {
-		getSpecialtiesInternal().add(new SpecialtyRef(specialty.id()));
+		getSpecialtiesInternal().add(new VetSpecialty(specialty.id(), id));
 	}
 
 	public Long getId() {
