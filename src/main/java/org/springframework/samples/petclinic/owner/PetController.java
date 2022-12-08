@@ -132,7 +132,7 @@ public class PetController {
 	public String initUpdateForm(@PathVariable("petId") int petId, ModelMap model) {
 		var pet = this.pets.findById(petId);
 		model.put("pet", pet);
-		model.put("owner", this.owners.findById(pet.getOwner()));
+		model.put("owner", this.owners.findById(pet.getOwnerId()));
 		return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
 	}
 
@@ -157,7 +157,7 @@ public class PetController {
 	}
 
 	private void validateType(Pet pet, BindingResult result, @Nullable MultipartFile image) {
-		if ((image == null || image.isEmpty()) && AUTO_DETECT_PET_TYPE.id().equals(pet.getType())) {
+		if ((image == null || image.isEmpty()) && AUTO_DETECT_PET_TYPE.id().equals(pet.getTypeId())) {
 			result.rejectValue("type", "mandatory", "Type need to be defined when no image is selected");
 		}
 	}
@@ -168,11 +168,11 @@ public class PetController {
 			try {
 				ImageProcessingResult imageProcessingResult = this.restTemplate.postForObject(url, image.getResource(), ImageProcessingResult.class);
 				pet.setImageUrl(imageProcessingResult.url);
-				if (AUTO_DETECT_PET_TYPE.id().equals(pet.getType())) {
+				if (AUTO_DETECT_PET_TYPE.id().equals(pet.getTypeId())) {
 					List<PetType> petTypes = this.pets.findPetTypes();
 					Map<String, PetType> petTypesMap = petTypes.stream().collect(Collectors.toMap(PetType::name, Function.identity()));
 					Optional<PetType> petTypeOptional = imageProcessingResult.tags().stream().filter(tag -> petTypesMap.containsKey(tag.name())).map(tag -> petTypesMap.get(tag.name())).findFirst();
-					petTypeOptional.ifPresentOrElse(petType -> pet.setType(petType.id()), () -> result.rejectValue("type", "mandatory", "Type need to be defined when image recognition fails"));
+					petTypeOptional.ifPresentOrElse(petType -> pet.setTypeId(petType.id()), () -> result.rejectValue("type", "mandatory", "Type need to be defined when image recognition fails"));
 				}
 			} catch (HttpClientErrorException.UnprocessableEntity ex) {
 				result.rejectValue("imageUrl", "animal", "Looks like this is not an animal");

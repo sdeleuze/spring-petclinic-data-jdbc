@@ -66,7 +66,7 @@ class VisitController {
 	public Visit loadPetWithVisit(@PathVariable("petId") Integer petId, Map<String, Object> model) {
 		var pet = this.pets.findById(petId);
 		model.put("pet", pet);
-		model.put("owner", this.owners.findById(pet.getOwner()));
+		model.put("owner", this.owners.findById(pet.getOwnerId()));
 		Visit visit = new Visit();
 		model.put("visit", visit);
 		model.put("petVisits", this.visits.findByPetId(petId));

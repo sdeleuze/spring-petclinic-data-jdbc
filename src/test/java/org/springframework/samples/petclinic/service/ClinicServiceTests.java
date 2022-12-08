@@ -144,7 +144,7 @@ public class ClinicServiceTests {
 
 		Pet pet = new Pet();
 		pet.setName("bowser");
-		pet.setType(2);
+		pet.setTypeId(2);
 		pet.setOwner(owner6);
 		this.pets.save(pet);
 		// checks that id has been generated

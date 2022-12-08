@@ -70,7 +70,7 @@ public class PetControllerTests {
 	@Test
 	public void testProcessCreationFormSuccess() throws Exception {
 		mockMvc
-				.perform(post("/owners/{ownerId}/pets/new", TEST_OWNER_ID).param("name", "Betty").param("type", "1")
+				.perform(post("/owners/{ownerId}/pets/new", TEST_OWNER_ID).param("name", "Betty").param("typeId", "1")
 						.param("birthDate", "2015-02-12"))
 				.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/owners/{ownerId}"));
 	}
@@ -81,8 +81,8 @@ public class PetControllerTests {
 				.perform(
 						post("/owners/{ownerId}/pets/new", TEST_OWNER_ID).param("name", "Betty").param("birthDate", "2015-02-12"))
 				.andExpect(model().attributeHasNoErrors("owner")).andExpect(model().attributeHasErrors("pet"))
-				.andExpect(model().attributeHasFieldErrors("pet", "type"))
-				.andExpect(model().attributeHasFieldErrorCode("pet", "type", "required")).andExpect(status().isOk())
+				.andExpect(model().attributeHasFieldErrors("pet", "typeId"))
+				.andExpect(model().attributeHasFieldErrorCode("pet", "typeId", "required")).andExpect(status().isOk())
 				.andExpect(view().name("pets/createOrUpdatePetForm"));
 	}
 
@@ -96,7 +96,7 @@ public class PetControllerTests {
 	public void testProcessUpdateFormSuccess() throws Exception {
 		mockMvc
 				.perform(post("/owners/{ownerId}/pets/{petId}/edit", TEST_OWNER_ID, TEST_PET_ID).param("name", "Betty")
-						.param("type", "1").param("birthDate", "2015-02-12"))
+						.param("typeId", "1").param("birthDate", "2015-02-12"))
 				.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/owners/{ownerId}"));
 	}
 
