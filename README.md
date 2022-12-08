@@ -20,7 +20,7 @@ target/image-service
 
 To build a native container image for deployment in the Cloud, customize the configuration i `src/main/resources/application-default.properties` and run:
 ```
-./mvn -Pnative clean spring-boot:build-image
+./mvnw -Pnative clean spring-boot:build-image
 ```
 
 ## Understanding the Spring Petclinic application with a few diagrams
