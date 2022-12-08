@@ -87,6 +87,13 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <env>
+                            <BP_BINARY_COMPRESSION_METHOD>upx</BP_BINARY_COMPRESSION_METHOD>
+                        </env>
+                    </image>
+                </configuration>
                 <executions>
                     <execution>
                         <!-- Spring Boot Actuator displays build-related information
