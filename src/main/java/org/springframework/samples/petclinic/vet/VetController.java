@@ -64,7 +64,7 @@ class VetController {
 	}
 
 	private VetDto vetToVetDto(Vet v) {
-		var specialtyList = v.getSpecialties().stream().map(s -> specialties.findById(s.specialtyId()))
+		var specialtyList = v.getSpecialties().stream().map(s -> specialties.findById(s.specialty()))
 				.collect(Collectors.toList());
 		return new VetDto(v.getId(), v.getFirstName(), v.getLastName(), specialtyList);
 	}

@@ -20,5 +20,5 @@ package org.springframework.samples.petclinic.vet;
  *
  * @author Maciej Walkowiak
  */
-public record VetSpecialty(Long specialtyId, Long vetId) {
+public record VetSpecialty(Long specialty, Long vet) {
 }

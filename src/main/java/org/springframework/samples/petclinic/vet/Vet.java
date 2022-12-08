@@ -45,7 +45,7 @@ public class Vet implements Serializable {
 	@NotEmpty
 	private String lastName;
 
-	@MappedCollection(idColumn = "VET_ID")
+	@MappedCollection
 	private Set<VetSpecialty> specialties;
 
 	protected Set<VetSpecialty> getSpecialtiesInternal() {

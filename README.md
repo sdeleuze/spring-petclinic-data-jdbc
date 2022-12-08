@@ -7,15 +7,20 @@ Check original project [readme](https://github.com/spring-projects/spring-petcli
 
 ## Build & run
 
-To build as a native executable
+Before running the application locally, run:
+```
+docker-compose up
+```
+
+To build and run locally as a native executable with h2 database:
 ```
 ./mvnw -Pnative clean native:compile
 target/image-service
 ```
 
-To build a native container image for deployment in the Cloud
+To build a native container image for deployment in the Cloud, customize the configuration i `src/main/resources/application-default.properties` and run:
 ```
-./mvn -Pnative spring-boot:build-image
+./mvn -Pnative clean spring-boot:build-image
 ```
 
 ## Understanding the Spring Petclinic application with a few diagrams
