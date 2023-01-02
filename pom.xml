@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.1</version>
     </parent>
     <name>petclinic</name>
 
@@ -76,12 +76,13 @@
             <artifactId>caffeine</artifactId>
         </dependency>
 
-        <dependency>
+        <!-- See https://github.com/spring-projects/spring-boot/issues/32853 -->
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>
