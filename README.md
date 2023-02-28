@@ -23,16 +23,37 @@ To build a native container image for deployment in the Cloud, customize the con
 ./mvnw -Pnative clean spring-boot:build-image
 ```
 
-## Understanding the Spring Petclinic application with a few diagrams
+## Benchmarking
 
-[See the presentation here](http://fr.slideshare.net/AntoineRey/spring-framework-petclinic-sample-application)
+It is recommended to benchmark workloads on containers running with maximum memory and CPU set. `java` and `native-image` memory management is hardly comparable, so no custom memory option like `-Xmx` should be set, just use the defaults. 
 
-## Interesting Spring Petclinic forks
+| Instance            | GraalVM CE   | GraalVM EE  | JVM         |
+|---------------------|--------------|-------------|-------------|
+| 1 vCPU / 0,5 G RAM  | data points  | data points | data points |
+| 2 vCPU / 1 G RAM    | data points  | data points | data points |
+| 4 vCPU / 2 G RAM    | data points  | data points | data points |
 
-The Spring Petclinic master branch in the main [spring-projects](https://github.com/spring-projects/spring-petclinic)
-GitHub org is the "canonical" implementation, currently based on Spring Boot and Thymeleaf.
+Data points measured are typically:
+ - startup time in ms
+ - Throughput in requests/s
+ - Latency in ms 
 
-This [spring-petclinic-data-jdbc](https://github.com/spring-petclinic/spring-petclinic-data-jdbc) project is one of the [several forks](https://spring-petclinic.github.io/docs/forks.html) 
-hosted in a special GitHub org: [spring-petclinic](https://github.com/spring-petclinic).
-If you have a special interest in a different technology stack
-that could be used to implement the Pet Clinic then please join the community there.
+Evolution of the peak performance (typically constant with native) can be also interesting to measure.
+
+PGO is usually too much constraints to setup and results can vary a lot depending on the sample requests, so it is not a first class use case and not something we measure.
+
+HTTP requests on http://localhost:8080/vets.html are typically used:
+ - They involve caching by default, can be interesting to measure with or without the `@Chacheable` annotation on `VetRepository.findAll()` to see the impact
+ - `VetController.vetToVetDto(Collection<Vet>)` is implemented with Java streams, could be interesting to measure an alternative implementation with a `for` loop instead.
+
+### JVM
+
+When benchmarking the JVM version, to get proper results, it is important to:
+ - Unpack the executable JAR [as documented here](https://docs.spring.io/spring-boot/docs/current/reference/html/container-images.html#container-images.efficient-images.unpacking)
+ - To not use the GraalVM LabsJDK which has a track of record of providing different results, latest [Liberica JDK](https://bell-sw.com/libericajdk/) 17 is recommended
+
+Easier way to achieve this is to leverage Buildpacks by creating a JVM-based container image with `./mvnw spring-boot:build-image`.
+
+### Native
+
+Easier way to benchmark properly the native version is to leverage Buildpacks by creating a native-based container image with `./mvnw -Pnative spring-boot:build-image`.
