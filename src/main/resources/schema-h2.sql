@@ -47,8 +47,7 @@ CREATE TABLE pet (
   name       VARCHAR(30),
   birth_date DATE,
   type_id    INTEGER NOT NULL,
-  owner_id   INTEGER NOT NULL,
-  image_url  VARCHAR(255)
+  owner_id   INTEGER NOT NULL
 );
 ALTER TABLE pet ADD CONSTRAINT fk_pet_owner FOREIGN KEY (owner_id) REFERENCES owner (id);
 ALTER TABLE pet ADD CONSTRAINT fk_pet_type FOREIGN KEY (type_id) REFERENCES pet_type (id);

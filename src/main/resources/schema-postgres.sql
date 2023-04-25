@@ -46,8 +46,7 @@ CREATE TABLE IF NOT EXISTS pet (
   name       TEXT,
   birth_date DATE,
   type_id    INT NOT NULL REFERENCES pet_type (id),
-  owner_id   INT REFERENCES owner (id),
-  image_url  VARCHAR(255)
+  owner_id   INT REFERENCES owner (id)
 );
 CREATE INDEX ON pet (name);
 CREATE INDEX ON pet (owner_id);
