@@ -46,7 +46,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 @RequestMapping("/owners/{ownerId}")
-@RegisterReflectionForBinding({ Pet.class, PetType.class, PetController.ImageProcessingResult.class })
+@RegisterReflectionForBinding({ Pet.class, PetType.class })
 public class PetController {
 
 	private static final String VIEWS_PETS_CREATE_OR_UPDATE_FORM = "pets/createOrUpdatePetForm";
@@ -125,9 +125,5 @@ public class PetController {
 			return "redirect:/owners/{ownerId}";
 		}
 	}
-
-	public record ImageProcessingResult(String url, List<Tag> tags) {}
-
-	public record Tag(String name, Float confidence) {}
 
 }
