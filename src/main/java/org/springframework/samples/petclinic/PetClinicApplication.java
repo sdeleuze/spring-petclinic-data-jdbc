@@ -18,10 +18,7 @@ package org.springframework.samples.petclinic;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.actuate.web.exchanges.HttpExchangeRepository;
-import org.springframework.boot.actuate.web.exchanges.InMemoryHttpExchangeRepository;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ImportRuntimeHints;
 
 /**
@@ -36,11 +33,6 @@ public class PetClinicApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PetClinicApplication.class, args);
-	}
-
-	@Bean
-	HttpExchangeRepository httpExchange() {
-		return new InMemoryHttpExchangeRepository();
 	}
 
 	static class Hints implements RuntimeHintsRegistrar {
