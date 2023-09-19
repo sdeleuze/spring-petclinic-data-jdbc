@@ -14,13 +14,13 @@ docker-compose up
 
 To build and run locally as a native executable with h2 database:
 ```
-./mvnw -Pnative clean native:compile
-target/image-service
+./gradlew nativeCompile
+build/native/nativeCompile/petclinic
 ```
 
 To build a native container image for deployment in the Cloud, customize the configuration i `src/main/resources/application-default.properties` and run:
 ```
-./mvnw -Pnative clean spring-boot:build-image
+./gradlew bootBuildImage
 ```
 
 ## Benchmarking
@@ -51,9 +51,3 @@ HTTP requests on http://localhost:8080/vets.html are typically used:
 When benchmarking the JVM version, to get proper results, it is important to:
  - Unpack the executable JAR [as documented here](https://docs.spring.io/spring-boot/docs/current/reference/html/container-images.html#container-images.efficient-images.unpacking)
  - To not use the GraalVM LabsJDK which has a track of record of providing different results, latest [Liberica JDK](https://bell-sw.com/libericajdk/) 17 is recommended
-
-Easier way to achieve this is to leverage Buildpacks by creating a JVM-based container image with `./mvnw spring-boot:build-image`.
-
-### Native
-
-Easier way to benchmark properly the native version is to leverage Buildpacks by creating a native-based container image with `./mvnw -Pnative spring-boot:build-image`.
