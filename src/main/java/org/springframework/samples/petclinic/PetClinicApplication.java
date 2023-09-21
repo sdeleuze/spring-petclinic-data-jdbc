@@ -32,7 +32,14 @@ import org.springframework.context.annotation.ImportRuntimeHints;
 public class PetClinicApplication {
 
 	public static void main(String[] args) {
+		long begin = System.currentTimeMillis();
 		SpringApplication.run(PetClinicApplication.class, args);
+		long end = System.currentTimeMillis();
+		boolean quit = Boolean.getBoolean("autoQuit");
+		if (quit) {
+			System.out.println("#### Booted and returned in " + (end - begin) + "ms");
+			System.exit(0);
+		}
 	}
 
 	static class Hints implements RuntimeHintsRegistrar {
