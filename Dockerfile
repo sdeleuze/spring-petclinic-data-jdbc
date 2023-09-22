@@ -12,4 +12,6 @@ RUN mkdir -p /opt/app
 COPY build/libs/spring-petclinic-0.0.1-SNAPSHOT.jar /opt/app/spring-petclinic-0.0.1-SNAPSHOT.jar
 COPY src/scripts/entrypoint.sh /opt/app/entrypoint.sh
 
+RUN apt-get update && apt-get -y install hey && rm -rf /var/lib/apt/lists/*
+
 ENTRYPOINT /opt/app/entrypoint.sh

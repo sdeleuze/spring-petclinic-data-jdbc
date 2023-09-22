@@ -1,0 +1,18 @@
+FROM container-registry.oracle.com/graalvm/native-image:17-ol8 AS builder
+
+# Set the working directory to /home/app
+WORKDIR /build
+
+# Copy the source code into the image for building
+COPY . /build
+
+RUN microdnf install findutils
+RUN ./gradlew nativeCompile
+
+FROM ubuntu:focal
+
+EXPOSE 8080
+
+# Copy the native executable into the containers
+COPY --from=builder /build/build/native/nativeCompile/spring-petclinic spring-petclinic
+ENTRYPOINT ["/spring-petclinic"]

@@ -12,6 +12,6 @@ echo "Using CRaC enabled JDK $url"
 docker build --no-cache -t sdeleuze/spring-petclinic:builder --build-arg CRAC_JDK_URL=$url .
 docker run -d --privileged --rm --name=spring-petclinic --ulimit nofile=1024 -p 8080:8080 -v $(pwd)/target:/opt/mnt sdeleuze/spring-petclinic:builder
 echo "Please wait during creating the checkpoint..."
-sleep 20
+sleep 90
 docker commit --change='ENTRYPOINT ["/opt/app/entrypoint.sh"]' $(docker ps -qf "name=spring-petclinic") sdeleuze/spring-petclinic:checkpoint
 docker kill $(docker ps -qf "name=spring-petclinic")
