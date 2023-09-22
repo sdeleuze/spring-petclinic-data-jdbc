@@ -10,7 +10,7 @@ echo "Using CRaC enabled JDK $url"
 
 ./gradlew build -x test
 docker build --no-cache -t sdeleuze/spring-petclinic:builder --build-arg CRAC_JDK_URL=$url .
-docker run -d --cap-add CHECKPOINT_RESTORE --cap-add SYS_ADMIN --cap-add SYS_PTRACE --rm --name=spring-petclinic --ulimit nofile=1024 -p 8080:8080 -v $(pwd)/target:/opt/mnt sdeleuze/spring-petclinic:builder
+docker run -d --privileged --rm --name=spring-petclinic --ulimit nofile=1024 -p 8080:8080 -v $(pwd)/target:/opt/mnt sdeleuze/spring-petclinic:builder
 echo "Please wait during creating the checkpoint..."
 sleep 20
 docker commit --change='ENTRYPOINT ["/opt/app/entrypoint.sh"]' $(docker ps -qf "name=spring-petclinic") sdeleuze/spring-petclinic:checkpoint
