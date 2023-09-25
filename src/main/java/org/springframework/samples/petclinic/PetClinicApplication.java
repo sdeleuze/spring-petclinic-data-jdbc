@@ -15,36 +15,18 @@
  */
 package org.springframework.samples.petclinic;
 
-import org.springframework.aot.hint.RuntimeHints;
-import org.springframework.aot.hint.RuntimeHintsRegistrar;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ImportRuntimeHints;
 
 /**
  * PetClinic Spring Boot Application.
  */
 @SpringBootApplication(proxyBeanMethods = false)
-@ImportRuntimeHints(PetClinicApplication.Hints.class)
 public class PetClinicApplication {
 
 	public static void main(String[] args) {
-		long begin = System.currentTimeMillis();
+
 		SpringApplication.run(PetClinicApplication.class, args);
-		long end = System.currentTimeMillis();
-		boolean quit = Boolean.getBoolean("autoQuit");
-		if (quit) {
-			System.out.println("#### Booted and returned in " + (end - begin) + "ms");
-			System.exit(0);
-		}
-	}
-
-	static class Hints implements RuntimeHintsRegistrar {
-
-		@Override
-		public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
-			hints.resources().registerPattern("messages/messages*");
-		}
 	}
 
 }

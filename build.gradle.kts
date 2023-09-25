@@ -1,10 +1,7 @@
-import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
-
 plugins {
 	java
 	id("org.springframework.boot") version "3.1.4"
 	id("io.spring.dependency-management") version "1.1.3"
-	id("org.graalvm.buildtools.native") version "0.9.27"
 }
 
 group = "com.example"
@@ -21,7 +18,6 @@ repositories {
 }
 
 dependencies {
-	//implementation("org.crac:crac:1.4.0")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-cache")
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
@@ -39,11 +35,3 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
-tasks.named<BootBuildImage>("bootBuildImage") {
-	builder = "dashaun/builder:tiny"
-	environment = mapOf(
-		"BP_NATIVE_IMAGE" to "true",
-		// "BPE_DELIM_JAVA_TOOL_OPTIONS" to " ",
-		// "BPE_APPEND_JAVA_TOOL_OPTIONS" to "-Dspring.aot.enabled=true"
-	)
-}
