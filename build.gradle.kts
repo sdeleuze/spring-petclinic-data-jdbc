@@ -2,13 +2,10 @@ import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
 	java
-	id("org.springframework.boot") version "3.2.0-M3"
-	id("org.springframework.boot.aot") version "3.2.0-M3"
+	id("org.springframework.boot") version "3.1.4"
 	id("io.spring.dependency-management") version "1.1.3"
 	id("org.graalvm.buildtools.native") version "0.9.27"
 }
-
-ext["spring-framework.version"] = "6.1.0-SNAPSHOT"
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
@@ -24,7 +21,7 @@ repositories {
 }
 
 dependencies {
-	implementation("org.crac:crac:1.4.0")
+	//implementation("org.crac:crac:1.4.0")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-cache")
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
