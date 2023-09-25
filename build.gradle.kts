@@ -41,9 +41,9 @@ tasks.withType<Test> {
 
 tasks.named<BootBuildImage>("bootBuildImage") {
 	builder = "dashaun/builder:tiny"
-environment.set(mapOf(
-	"BP_NATIVE_IMAGE" to "true",
-//		"BPE_DELIM_JAVA_TOOL_OPTIONS" to " ",
-//		"BPE_APPEND_JAVA_TOOL_OPTIONS" to "-Dspring.aot.enabled=true"
-))
+	environment = mapOf(
+		"BP_NATIVE_IMAGE" to "true",
+		// "BPE_DELIM_JAVA_TOOL_OPTIONS" to " ",
+		// "BPE_APPEND_JAVA_TOOL_OPTIONS" to "-Dspring.aot.enabled=true"
+	)
 }
