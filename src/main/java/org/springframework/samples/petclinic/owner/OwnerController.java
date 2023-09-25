@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-class OwnerController {
+public class OwnerController {
 
 	private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
 	private final OwnerRepository owners;
@@ -136,10 +136,10 @@ class OwnerController {
 		return mav;
 	}
 
-	record OwnerDetails(Owner owner, List<Pet> pets) {
+	public record OwnerDetails(Owner owner, List<Pet> pets) {
 	}
 
-	record PetDetails(Pet pet, PetType type, List<Visit> visits) {
+	public record PetDetails(Pet pet, PetType type, List<Visit> visits) {
 	}
 
 }
