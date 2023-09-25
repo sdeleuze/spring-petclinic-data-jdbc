@@ -1,7 +1,10 @@
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
+
 plugins {
 	java
 	id("org.springframework.boot") version "3.1.4"
 	id("io.spring.dependency-management") version "1.1.3"
+	id("org.graalvm.buildtools.native") version "0.9.27"
 }
 
 group = "com.example"
@@ -37,3 +40,11 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
+if (System.getProperty("os.arch") == "aarch64") {
+	tasks.named<BootBuildImage>("bootBuildImage") {
+		builder = "dashaun/builder:tiny"
+		environment = mapOf(
+			"BP_NATIVE_IMAGE" to "true"
+		)
+	}
+}
