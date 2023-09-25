@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ex
+set -e
 
 REBUILD=false
 HOST_WORK_DIR="$( pwd )"
@@ -55,4 +55,10 @@ if [ $REBUILD ]; then
   docker build -t spring-checkpoint-restore-dev -f Dockerfile.crac --build-arg CRAC_JDK_URL=$url .
 fi
 
-docker run -it --entrypoint /bin/bash --privileged -p 8080:8080 -v $HOME/.m2:/root/.m2:ro -v $HOST_WORK_DIR:$CONTAINER_WORK_DIR:delegated -w $CONTAINER_WORK_DIR spring-checkpoint-restore-dev
+docker run -it \
+           --privileged \
+           -p 8080:8080 \
+           -v $HOME/.m2:/root/.m2:ro \
+           -v $HOST_WORK_DIR:$CONTAINER_WORK_DIR:delegated \
+           -w $CONTAINER_WORK_DIR \
+           spring-checkpoint-restore-dev

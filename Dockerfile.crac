@@ -16,3 +16,5 @@ RUN mkdir -p /opt/gradle && cd /opt/gradle && curl -L "https://services.gradle.o
 
 RUN mkdir -p /workspace
 RUN git config --global --add safe.directory /workspace
+
+ENTRYPOINT /bin/bash

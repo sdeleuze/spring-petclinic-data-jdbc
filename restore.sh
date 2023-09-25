@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-set -ex
+set -e
 
-java -XX:CRaCRestoreFrom=$CRAC_FILES_DIR&
+java -XX:CRaCRestoreFrom=/opt/crac-files&
 PID=$!
 trap "kill $PID" SIGINT SIGTERM
 wait $PID
