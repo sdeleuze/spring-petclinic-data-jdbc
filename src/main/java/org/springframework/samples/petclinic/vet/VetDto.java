@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2021 the original author or authors.
+ * Copyright 2012-2023 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,6 @@ package org.springframework.samples.petclinic.vet;
 
 import java.util.List;
 
-/**
- * @author Maciej Walkowiak
- */
 public record VetDto(Long id, String firstName, String lastName, List<Specialty> specialties) {
 
 	public int getNrOfSpecialties() {
