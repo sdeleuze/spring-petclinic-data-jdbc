@@ -46,7 +46,7 @@ public class PetClinicApplication {
 
 		@Override
 		public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
-			hints.resources().registerResourceBundle("messages/messages");
+			hints.resources().registerPattern("messages/messages*");
 		}
 	}
 
