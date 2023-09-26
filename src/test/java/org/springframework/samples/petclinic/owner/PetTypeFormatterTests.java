@@ -30,11 +30,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-/**
- * Test class for {@link PetTypeFormatter}
- *
- * @author Colin But
- */
 @ExtendWith(MockitoExtension.class)
 public class PetTypeFormatterTests {
 

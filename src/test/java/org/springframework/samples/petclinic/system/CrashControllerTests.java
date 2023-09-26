@@ -27,13 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-/**
- * Test class for {@link CrashController}
- *
- * @author Colin But
- */
-// Waiting https://github.com/spring-projects/spring-boot/issues/5574
-@Disabled
+@Disabled // See https://github.com/spring-projects/spring-boot/issues/5574
 @WebMvcTest(controllers = CrashController.class)
 public class CrashControllerTests {
 

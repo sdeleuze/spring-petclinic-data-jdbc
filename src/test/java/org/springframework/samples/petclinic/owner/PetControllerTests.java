@@ -31,11 +31,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.test.web.servlet.MockMvc;
 
-/**
- * Test class for the {@link PetController}
- *
- * @author Colin But
- */
 @WebMvcTest(value = PetController.class, includeFilters = @ComponentScan.Filter(value = PetTypeFormatter.class, type = FilterType.ASSIGNABLE_TYPE))
 @AutoConfigureWebClient
 public class PetControllerTests {

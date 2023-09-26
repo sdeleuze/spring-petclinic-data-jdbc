@@ -32,9 +32,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-/**
- * Test class for the {@link VetController}
- */
 @WebMvcTest(VetController.class)
 public class VetControllerTests {
 

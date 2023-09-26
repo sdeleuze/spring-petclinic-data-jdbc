@@ -30,11 +30,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.samples.petclinic.visit.VisitRepository;
 import org.springframework.test.web.servlet.MockMvc;
 
-/**
- * Test class for {@link VisitController}
- *
- * @author Colin But
- */
 @WebMvcTest(VisitController.class)
 public class VisitControllerTests {
 

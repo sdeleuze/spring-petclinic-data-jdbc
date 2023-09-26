@@ -20,10 +20,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.SerializationUtils;
 
-/**
- * @author Dave Syer
- *
- */
 public class VetTests {
 
 	@Test

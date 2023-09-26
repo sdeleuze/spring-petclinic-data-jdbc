@@ -34,11 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-/**
- * Test class for {@link OwnerController}
- *
- * @author Colin But
- */
 @WebMvcTest(OwnerController.class)
 public class OwnerControllerTests {
 
