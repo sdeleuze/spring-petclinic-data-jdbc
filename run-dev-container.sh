@@ -52,7 +52,7 @@ if [ $REBUILD ]; then
       *)       url="https://cdn.azul.com/zulu/bin/zulu17.44.55-ca-crac-jdk17.0.8.1-linux_x64.tar.gz" ;;
   esac
   echo "Using CRaC enabled JDK $url"
-  docker build -t spring-checkpoint-restore-dev -f Dockerfile.crac --build-arg CRAC_JDK_URL=$url .
+  docker build -t spring-checkpoint-restore-dev -f Dockerfile.cracdev --build-arg CRAC_JDK_URL=$url .
 fi
 
 docker run -it \
