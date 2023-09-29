@@ -6,7 +6,7 @@ mkdir -p $CRAC_FILES_DIR
 if [ -z "$(ls -A $CRAC_FILES_DIR)" ]; then
   echo 128 > /proc/sys/kernel/ns_last_pid; java  -XX:CRaCCheckpointTo=$CRAC_FILES_DIR -jar /opt/app/spring-petclinic-1.0.0-SNAPSHOT.jar&
   sleep 5
-  #hey -z 10s http://localhost:8080/vets.html
+  hey -z 10s http://localhost:8080/vets.html
   jcmd /opt/app/spring-petclinic-1.0.0-SNAPSHOT.jar JDK.checkpoint
   sleep infinity
 else
