@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
+
 plugins {
 	java
 	id("org.springframework.boot") version "3.1.4"
@@ -37,3 +39,8 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
+if (System.getProperty("os.arch") == "aarch64") {
+	tasks.named<BootBuildImage>("bootBuildImage") {
+		builder = "dashaun/builder:base"
+	}
+}
