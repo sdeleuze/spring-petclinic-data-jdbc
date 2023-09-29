@@ -13,5 +13,7 @@ docker build -t sdeleuze/spring-petclinic:builder -f Dockerfile.cracdeploy --bui
 docker run -d --privileged --rm --name=spring-petclinic sdeleuze/spring-petclinic:builder
 echo "Please wait during creating the checkpoint..."
 sleep 20
-docker commit --change='ENTRYPOINT ["/opt/app/entrypoint.sh"]' $(docker ps -qf "name=spring-petclinic") sdeleuze/spring-petclinic:checkpoint
+docker commit --change='ENTRYPOINT ["/opt/app/entrypoint.sh"]' \
+       $(docker ps -qf "name=spring-petclinic") \
+       sdeleuze/spring-petclinic:checkpoint
 docker kill $(docker ps -qf "name=spring-petclinic")
