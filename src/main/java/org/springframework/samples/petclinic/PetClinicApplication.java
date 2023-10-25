@@ -26,6 +26,10 @@ public class PetClinicApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PetClinicApplication.class, args);
+		Boolean quit = Boolean.getBoolean("autoQuit");
+		if (quit) {
+			System.exit(0);
+		}
 	}
 
 }

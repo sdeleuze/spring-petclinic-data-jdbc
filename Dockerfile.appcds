@@ -1,0 +1,8 @@
+FROM bellsoft/liberica-openjdk-debian:21
+
+COPY build/libs/spring-petclinic-1.0.0-SNAPSHOT.jar /data/spring-petclinic.jar
+COPY build/libs/spring-petclinic.jsa /data/spring-petclinic.jsa
+COPY src/scripts/entrypoint-appcds.sh /data/entrypoint.sh
+RUN cd /data && jar xf spring-petclinic.jar
+
+ENTRYPOINT /data/entrypoint.sh
