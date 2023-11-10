@@ -1,8 +1,12 @@
-FROM bellsoft/liberica-openjdk-debian:21
+FROM bellsoft/liberica-openjdk-debian:17 as snapshots
 
-COPY build/libs/spring-petclinic-1.0.0-SNAPSHOT.jar /data/spring-petclinic.jar
-COPY build/libs/spring-petclinic-1.0.0-SNAPSHOT-plain.jar /data/spring-petclinic-plain.jar
+COPY . /data/
+RUN /data/src/scripts/setup.sh && cd /data && ./install-snapshots.sh
+
+FROM bellsoft/liberica-openjdk-debian:21
+COPY --from=snapshots /root/.m2 /root/.m2
+COPY . /data/
+RUN /data/src/scripts/setup.sh && cd /data && ./exploded.sh -b
 COPY src/scripts/entrypoint-exploded.sh /data/entrypoint.sh
-RUN cd /data && jar xf spring-petclinic.jar
 
 ENTRYPOINT /data/entrypoint.sh

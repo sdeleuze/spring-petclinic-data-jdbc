@@ -12,3 +12,5 @@ cd ..
 git clone  https://github.com/snicoll/spring-boot.git --branch appcds --single-branch
 cd spring-boot
 ./gradlew publishToMavenLocal -x test -x intTest
+cd ..
+rm -rf repos
