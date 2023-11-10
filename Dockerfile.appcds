@@ -6,7 +6,7 @@ RUN /data/src/scripts/setup.sh && cd /data && ./install-snapshots.sh
 FROM bellsoft/liberica-openjdk-debian:21
 COPY --from=snapshots /root/.m2 /root/.m2
 COPY . /data/
-RUN /data/src/scripts/setup.sh && cd /data && ./appcds -b
+RUN /data/src/scripts/setup.sh && cd /data && ./appcds.sh -b
 COPY src/scripts/entrypoint-appcds.sh /data/entrypoint.sh
 
 ENTRYPOINT /data/entrypoint.sh
