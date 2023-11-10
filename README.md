@@ -26,6 +26,10 @@ Test and compare locally various ways of running Spring applications from the sl
 ./appcds-aot.sh
 ```
 
+Notice you can pass `-b` parameter to only build the application without running it, for example using `./exploded.sh -b`.
+
+## Data points
+
 On my MacBook M2 Pro:
 - Executable JAR: `Started PetClinicApplication in 1.534 seconds (process running for 1.763)`
 - Exploded: `Started PetClinicApplication in 1.118 seconds (process running for 1.245)`
