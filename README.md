@@ -46,14 +46,14 @@ On my MacBook M2 Pro:
 
 Create the container image with one of those scripts (can be pretty long):
 ```bash
-./create-appcds-container-image.sh
 ./create-exploded-container-image.sh
+./create-appcds-container-image.sh
 ```
 
 Then check locally they are running as expected with one of those scripts:
 ```bash
-./run-appcds-container.sh
 ./run-exploded-container.sh
+./run-appcds-container.sh
 ```
 
 You can then tag and deploy the container images (`sdeleuze/spring-petclinic:exploded`, `sdeleuze/spring-petclinic:appcds`) to your platform.
