@@ -1,0 +1,12 @@
+FROM bellsoft/liberica-openjdk-debian:17 as snapshots
+
+COPY . /data/
+RUN /data/src/scripts/setup.sh && cd /data && ./install-snapshots.sh
+
+FROM bellsoft/liberica-openjdk-debian:21
+COPY --from=snapshots /root/.m2 /root/.m2
+COPY . /data/
+RUN /data/src/scripts/setup.sh && cd /data && ./appcds-aot.sh -b
+COPY src/scripts/entrypoint-appcds-aot.sh /data/entrypoint.sh
+
+ENTRYPOINT /data/entrypoint.sh
