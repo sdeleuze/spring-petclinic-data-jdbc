@@ -6,7 +6,8 @@ This branch is intended to experiment with AppCDS and efficient deployment of Sp
 
 Install Spring snapshots:
 ```bash
-sdk use java 17.0.8.1-librca
+sdk install java 17.0.9-zulu
+sdk use java 17.0.9-zulu
 ./install-snapshots.sh
 ```
 
@@ -20,7 +21,7 @@ sdk env
 
 Test and compare locally various ways of running Spring applications from the slow to the faster:
 ```bash
-./executable-jar.sh
+./jarexe.sh
 ./exploded.sh
 ./appcds.sh 
 ./appcds-aot.sh
@@ -40,12 +41,14 @@ On my MacBook M2 Pro:
 - AppCDS + Spring AOT: `Started PetClinicApplication in 0.639 seconds (process running for 0.747)`
   - 58% decrease from executable JAR
   - 42% decrease from exploded
-  - 11% decrease from AppCDS
+  - 11% decrease from AppCD
+
 
 ## Build and run container images
 
 Create the container image with one of those scripts (can be pretty long):
 ```bash
+./create-jarexe-container-image.sh
 ./create-exploded-container-image.sh
 ./create-appcds-container-image.sh
 ./create-appcds-aot-container-image.sh
@@ -53,6 +56,7 @@ Create the container image with one of those scripts (can be pretty long):
 
 Then check locally they are running as expected with one of those scripts:
 ```bash
+./run-jaxexe-container.sh
 ./run-exploded-container.sh
 ./run-appcds-container.sh
 ./run-appcds-aot-container.sh
