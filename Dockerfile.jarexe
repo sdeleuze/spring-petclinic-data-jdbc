@@ -1,6 +1,6 @@
 FROM azul/zulu-openjdk:21-latest
 COPY . /data/
 RUN /data/src/scripts/setup.sh && cd /data && ./jarexe.sh -b
-COPY src/scripts/entrypoint-jaxexe.sh /data/entrypoint.sh
+COPY src/scripts/entrypoint-jarexe.sh /data/entrypoint.sh
 
 ENTRYPOINT /data/entrypoint.sh
