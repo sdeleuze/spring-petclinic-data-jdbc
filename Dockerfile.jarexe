@@ -1,10 +1,4 @@
-FROM azul/zulu-openjdk:17-latest as snapshots
-
-COPY . /data/
-RUN /data/src/scripts/setup.sh && cd /data && ./install-snapshots.sh
-
 FROM azul/zulu-openjdk:21-latest
-COPY --from=snapshots /root/.m2 /root/.m2
 COPY . /data/
 RUN /data/src/scripts/setup.sh && cd /data && ./jarexe.sh -b
 COPY src/scripts/entrypoint-jaxexe.sh /data/entrypoint.sh
