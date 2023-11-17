@@ -78,4 +78,4 @@ Then check locally they are running as expected with one of those scripts:
 ./run-appcds-aot-container.sh
 ```
 
-You can then tag and deploy the container images (`sdeleuze/spring-petclinic:exploded`, `sdeleuze/spring-petclinic:appcds`) to your platform.
+You can then tag and deploy the container images to your platform.
