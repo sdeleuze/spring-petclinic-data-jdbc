@@ -4,14 +4,7 @@ This branch is intended to experiment with AppCDS and efficient deployment of Sp
 
 ## Pre-requisites
 
-Install Spring snapshots:
-```bash
-sdk install java 17.0.9-zulu
-sdk use java 17.0.9-zulu
-./install-snapshots.sh
-```
-
-Switch to Java 21 to run the application.
+Use to Java 21 to run the application.
 ```bash
 sdk env install
 sdk env

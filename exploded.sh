@@ -2,7 +2,7 @@
 set -e
 
 ./gradlew clean build -x test
-java -Djarmode=layertools -jar build/libs/spring-petclinic-1.0.0-SNAPSHOT.jar extract2 --destination build/libs/
+./explode-boot-jar.sh -d build/libs build/libs/spring-petclinic-1.0.0-SNAPSHOT.jar
 if [[ $1 != "-b" ]]; then
   java -jar build/libs/run-app.jar
 fi
