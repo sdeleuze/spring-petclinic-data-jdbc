@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk:21-latest
+FROM bellsoft/liberica-openjdk-debian:21.0.1
 COPY . /data/
 RUN /data/src/scripts/setup.sh && cd /data && ./exploded.sh -b
 COPY src/scripts/entrypoint-exploded.sh /data/entrypoint.sh

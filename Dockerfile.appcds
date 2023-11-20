@@ -1,4 +1,4 @@
-FROM azul/zulu-openjdk:21-latest
+FROM bellsoft/liberica-openjdk-debian:21.0.1-cds
 COPY . /data/
 RUN /data/src/scripts/setup.sh && cd /data && ./appcds.sh -b
 COPY src/scripts/entrypoint-appcds.sh /data/entrypoint.sh
