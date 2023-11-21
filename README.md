@@ -4,7 +4,7 @@ This branch is intended to experiment with AppCDS and efficient deployment of Sp
 
 ## Pre-requisites
 
-Use to Java 21 to run the application.
+Use a Java 21 distribution with a prebuilt CDS archive to run the application. Here you can use:
 ```bash
 sdk env install
 sdk env
