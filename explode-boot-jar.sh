@@ -4,7 +4,18 @@ set -e
 while test $# -gt 0; do
   case "$1" in
     -h|--help)
-      echo "explode-boot-jar.sh - explode Spring Boot JAR in order to run the application efficiently"
+      echo "explode-boot-jar.sh - explode Spring Boot executable JAR in order to run"
+      echo "the application efficiently and maximizing AppCDS effectiveness."
+      echo " "
+      echo "my-dir
+            ├── application
+            │   └── my-app-1.0.0-SNAPSHOT.jar
+            ├── dependencies
+            │   ├── ...
+            │   ├── spring-context-6.1.0.jar
+            │   ├── spring-context-support-6.1.0.jar
+            │   ├── ...
+            └── run-app.jar"
       echo " "
       echo "explode-boot-jar.sh [options] application.jar"
       echo " "
