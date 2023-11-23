@@ -1,10 +1,10 @@
-FROM bellsoft/liberica-openjdk-debian:21.0.1-cds as build
+FROM bellsoft/liberica-openjdk-debian:21.0.1 as build
 COPY . /data/
 RUN apt-get install --no-install-recommends -y unzip
-RUN cd /data && ./appcds-aot.sh -b
+RUN cd /data && ./unpacked.sh -b
 
 FROM bellsoft/liberica-openjdk-debian:21.0.1-cds
 COPY --from=build /data/build/unpacked /data/build/unpacked
-COPY src/scripts/entrypoint-appcds-aot.sh /data/entrypoint.sh
+COPY src/scripts/entrypoint-unpacked.sh /data/entrypoint.sh
 
 ENTRYPOINT /data/entrypoint.sh
