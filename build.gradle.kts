@@ -42,9 +42,3 @@ dependencies {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
-
-if (System.getProperty("os.arch") == "aarch64") {
-	tasks.named<BootBuildImage>("bootBuildImage") {
-		builder = "dashaun/builder:base"
-	}
-}
