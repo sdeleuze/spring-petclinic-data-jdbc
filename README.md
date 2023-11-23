@@ -1,6 +1,7 @@
 # Spring PetClinic Sample Application built with Spring Data JDBC
 
-This branch is intended to experiment with AppCDS and efficient deployment of Spring Boot applications.
+This branch is intended to demonstrate how to use [Spring Framework 6.1 AppCDS support](https://docs.spring.io/spring-framework/reference/6.1-SNAPSHOT/integration/class-data-sharing.html) with Spring Petclinic.
+See also https://github.com/sdeleuze/spring-appcds-demo for a simpler example.
 
 ## Pre-requisites
 
